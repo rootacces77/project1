@@ -1,2 +1,4 @@
 ---
 # vars file for selinux-role
+sshd_port: 2222
+sshd_proto: "tcp"

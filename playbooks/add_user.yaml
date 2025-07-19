@@ -1,0 +1,37 @@
+- name: Add user and set up sshd
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Create User
+      ansible.builtin.user:
+        name: "{{user_name}}"
+        create_home: true
+        expires: -1
+        groups: wheel
+        shell: /bin/bash
+        state: present
+    - name: Add user to sudo
+      ansible.builtin.copy:
+        dest: '/etc/sudoers.d/ansible-user'
+        content: "{{user_name}} ALL=(ALL) NOPASSWD: ALL"
+        mode: '0644'
+        owner: root
+        group: root
+    - name: Add ssh key
+      ansible.posix.authorized_key:
+        user: "{{user_name}}"
+        key: "{{user_public_key}}"
+        manage_dir: true
+        state: present 
+    - name: Setup firewalld
+      ansible.builtin.import_role:
+        name: firewalld-role
+        tasks_from: sshd.yaml
+    - name: Setup selinux
+      ansible.builtin.import_role:
+        name: selinux-role
+        tasks_from: sshd.yaml
+    - name: Setup sshd
+      ansible.builtin.import_role:
+        name: sshd-role
+        tasks_from: main.yaml

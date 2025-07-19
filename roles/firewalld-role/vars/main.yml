@@ -1,2 +1,4 @@
 ---
 # vars file for firewalld-role
+
+sshd_port: 2222

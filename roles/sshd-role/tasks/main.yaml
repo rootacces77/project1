@@ -1,0 +1,12 @@
+---
+# tasks file for sshd-role
+
+- name: Setup sshd config
+  ansible.builtin.template:
+    src: server_config.conf.j2
+    dest: /etc/ssh/sshd_config.d/server_config.conf
+    mode: '0640'
+    owner: root
+    group: root
+  notify:
+    - Restart sshd

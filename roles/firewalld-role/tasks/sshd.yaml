@@ -1,0 +1,34 @@
+- name: Create service file
+  ansible.builtin.copy:
+    remote_src: true
+    src: '/usr/lib/firewalld/services/ssh.xml'
+    dest: '/usr/lib/firewalld/services/sshd.xml'
+    mode: '0644'
+    owner: root
+    group: root
+
+- name: Change the port
+  ansible.builtin.replace:
+    path: '/usr/lib/firewalld/services/sshd.xml'
+    regexp: ' <port protocol="tcp" port="22"/>'
+    replace: ' <port protocol="tcp" port="{{sshd_port}}"/>'
+  notify:
+    - Reload firewalld
+
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
+
+- name: Add custom sshd service
+  ansible.builtin.firewalld:
+    service: sshd
+    immediate: true
+    permanent: true
+    state: enabled
+
+- name: Remove ssh service
+  ansible.builtin.firewalld:
+    service: ssh
+    immediate: true
+    permanent: true
+    state: disabled
+
