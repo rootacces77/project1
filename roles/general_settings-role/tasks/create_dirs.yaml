@@ -1,0 +1,25 @@
+- name: Create scripts dir
+  ansible.builtin.file:
+    state: directory
+    path: /scripts
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Create database-data dir
+  ansible.builtin.file:
+    state: directory
+    path: '/database-data'
+    owner: root
+    group: root
+    mode: '0755'
+  when: "'database' in group_names"
+
+- name: Create mysql dir
+  ansible.builtin.file:
+    state: directory
+    path: /database-dir/mysql
+    owner: mysql
+    group: mysql
+    mode: '0750'
+  when: "'database' in group_names"

@@ -1,0 +1,8 @@
+- name: Set Fcontext
+  community.general.sefcontext:
+    setype: mysqld_db_t
+    state: present
+    target: '{{mariadb_path}}(/.*)?'
+  notify:
+    - Restorecon mariadb
+    

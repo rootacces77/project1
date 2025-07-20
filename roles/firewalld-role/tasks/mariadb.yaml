@@ -1,0 +1,21 @@
+- name: Create Mariadb Service
+  ansible.builtin.copy:
+    remote_src: true
+    src: '/usr/lib/firewalld/services/mysql.xml'
+    dest: '/usr/lib/firewalld/services/mariadb.xml'
+    mode: '0644'
+    owner: root
+    group: root
+
+- name: Reload firewalld
+  ansible.builtin.command: 'firewall-cmd --reload'
+#- name: Flush handlers
+#  ansible.builtin.meta: flush_handlers
+
+- name: Enable Mariadb Service
+  ansible.builtin.firewalld:
+    service: mariadb
+    immediate: true
+    permanent: true
+    state: enabled
+    

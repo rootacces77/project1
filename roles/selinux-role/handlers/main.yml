@@ -1,2 +1,4 @@
 ---
 # handlers file for selinux-role
+- name: Restorecon mariadb
+  ansible.builtin.command: 'restorecon -Rv {{mariadb_path}}'

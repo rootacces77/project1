@@ -3,15 +3,15 @@ ansible-navigator:
     config:
       path: ./ansible.cfg 
 
-  execution-enviroment:
+  execution-environment:
     container-engine: docker
     enabled: true
     image: project1-env:latest
     pull:
       policy: missing
 
-  logging:
+#  logging:
 
 
-   playbook-artifact:
-     enable: false
+  playbook-artifact:
+    enable: false
