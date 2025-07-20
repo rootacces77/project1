@@ -1,6 +1,6 @@
 - name: Add user and set up sshd
   hosts: all
-  gather_facts: false
+  gather_facts: true
   tasks:
     - name: Create User
       ansible.builtin.user:
@@ -23,14 +23,6 @@
         key: "{{user_public_key}}"
         manage_dir: true
         state: present 
-    - name: Setup firewalld
-      ansible.builtin.import_role:
-        name: firewalld-role
-        tasks_from: sshd.yaml
-    - name: Setup selinux
-      ansible.builtin.import_role:
-        name: selinux-role
-        tasks_from: sshd.yaml
     - name: Setup sshd
       ansible.builtin.import_role:
         name: sshd-role
