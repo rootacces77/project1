@@ -1,0 +1,29 @@
+- name: Create new zone
+  ansible.builtin.template:
+    src: database-zone.xml.j2
+    dest: /etc/firewalld/zones/database-zone.xml
+    mode: '0644'
+    owner: root
+    group: root
+  notify:
+    - Reload firewalld
+
+- name: Flush Handlers
+  ansible.builtin.meta: flush_handlers
+
+- name: Get default zone
+  ansible.builtin.command: 'firewall-cmd --get-default-zone'
+  register: default_zone
+
+- name: Set default zone
+  ansible.builtin.command: 'firewall-cmd --set-default-zone={{database_zone}}'
+  when: "'{{database_zone}}' not in default_zone.stdout"
+
+#- name: Add Interfaces
+#  ansible.posix.firewalld:
+#    interface: "{{interface_name}}"
+#    zone: database-zone
+#    permanent: true
+#    immediate: true
+#    state: present  
+   

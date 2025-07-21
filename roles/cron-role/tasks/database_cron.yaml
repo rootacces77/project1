@@ -1,0 +1,9 @@
+- name: Run basic-update.sh
+  ansible.builtin.cron:
+    day: "*/15"
+    hour: 04
+    minute: 00
+    name: "Basic Update - No Kernel / MariaDB"
+    state: present
+    user: root
+    job: /scripts/basic-update.sh

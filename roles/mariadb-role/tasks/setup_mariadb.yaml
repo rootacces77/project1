@@ -47,3 +47,6 @@
     update_password: always
     login_unix_socket: "{{mariadb_socket}}"
   ignore_errors: true
+
+- name: Import deploy_database.yaml
+  ansible.builtin.import_tasks: deploy_database.yaml

@@ -1,4 +1,7 @@
 ---
 # tasks file for general_settings-role
-- name: Task X
+- name: Task1
+  ansible.builtin.import_tasks: general_settings.yaml
+
+- name: Task2
   ansible.builtin.import_tasks: create_dirs.yaml

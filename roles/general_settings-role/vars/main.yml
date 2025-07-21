@@ -1,2 +1,5 @@
 ---
 # vars file for general_settings-role
+
+general_database_hostname: "database-server"
+general_timezone: "Europe/Belgrade"
