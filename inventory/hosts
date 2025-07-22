@@ -3,4 +3,5 @@
 
 [webserver]
 
-[entry-server]
+[bastion]
+172.16.0.2

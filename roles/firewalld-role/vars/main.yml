@@ -5,5 +5,5 @@
 
 #Name of database zone
 database_zone: "database-zone"
-
+bastion_zone: "bastion-zone"
 

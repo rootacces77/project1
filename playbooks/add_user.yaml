@@ -7,9 +7,19 @@
         name: "{{user_name}}"
         create_home: true
         expires: -1
+        groups: sudo
+        shell: /bin/bash
+        state: present
+      when: ansible_facts['os_family'] == "Debian"
+    - name: Create User
+      ansible.builtin.user:
+        name: "{{user_name}}"
+        create_home: true
+        expires: -1
         groups: wheel
         shell: /bin/bash
         state: present
+      when: ansible_facts['os_family'] == "RedHat"
     - name: Add user to sudo
       ansible.builtin.copy:
         dest: '/etc/sudoers.d/ansible-user'

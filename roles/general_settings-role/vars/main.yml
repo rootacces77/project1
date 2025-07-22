@@ -3,3 +3,5 @@
 
 general_database_hostname: "database-server"
 general_timezone: "Europe/Belgrade"
+
+general_bastion_hostname: "bastion-server"
