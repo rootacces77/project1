@@ -2,14 +2,19 @@
   hosts: all
   gather_facts: true
   become: true
+#  vars:
+#    https_port: 443
   vars_files:
-    - main.yaml
+    - vars/main.yaml
   roles:
-    - general_settings-role
-    - firewalld-role
-    - chrony-role
-    - storage-role 
-    - mariadb-role
-    - cron-role
-    - sysctl-role
-    - AIDE-role
+    - role: general_settings-role
+    - role: firewalld-role
+    - role: chrony-role
+    - role: storage-role 
+    - role: nginx-role
+    - role: suricata-role
+    - role: fail2ban-role
+    - role: mariadb-role
+    - role: cron-role
+    - role: sysctl-role
+    - role: AIDE-role

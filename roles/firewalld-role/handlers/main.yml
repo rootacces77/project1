@@ -2,3 +2,6 @@
 # handlers file for firewalld-role
 - name: Reload firewalld
   ansible.builtin.command: 'firewall-cmd --reload'
+
+- name: Reload nftables
+  ansible.builtin.command: 'nft -f /etc/nftables.conf'

@@ -1,26 +1,9 @@
-- name: Zone Exsists
-  ansible.builtin.stat:
-    path: /etc/firewalld/zones/bastion-zone.xml
-  register: zone_stat
-    
-- name: Create new zone
+- name: Create nftables config
   ansible.builtin.template:
-    src: bastion-zone.xml.j2
-    dest: /etc/firewalld/zones/bastion-zone.xml
-    mode: '0644'
+    src: nftables.conf.j2
+    dest: /etc/nftables.conf
     owner: root
     group: root
+    mode: '0644'
   notify:
-    - Reload firewalld
-  when: zone_stat.stat.exists == false
-
-- name: Flush Handlers
-  ansible.builtin.meta: flush_handlers
-
-- name: Get default zone
-  ansible.builtin.command: 'firewall-cmd --get-default-zone'
-  register: default_zone
-
-- name: Set default zone
-  ansible.builtin.command: 'firewall-cmd --set-default-zone={{bastion_zone}}'
-  when: "'{{bastion_zone}}' not in default_zone.stdout"
+    - Reload nftables

@@ -1,8 +1,5 @@
 sshd_port: 2222
-
+https_port: 443
+http_port: 80
 mariadb_port: 3306
 
-#Whether to initialize new database
-aide_database_init: true
-aide_basion_init: true
-aide_webserver_init: true

@@ -1,0 +1,9 @@
+- name: Schedule a job
+  ansible.builtin.cron:
+    name: Update Script
+    job: /scripts/basic-update2.sh
+    user: root
+    day: "*/15"
+    hour: 04
+    minute: 00
+    state: present

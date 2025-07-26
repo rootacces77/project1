@@ -3,3 +3,7 @@
 - name: Setup database firewall
   ansible.builtin.include_tasks: database_firewall.yaml
   when: "'database' in group_names"
+
+- name: Setup bastion firewall
+  ansible.builtin.include_tasks: bastion_firewall.yaml
+  when: "'bastion' in group_names"

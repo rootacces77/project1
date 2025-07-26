@@ -30,3 +30,6 @@ GatewayPorts		{{sshd_gw_ports}}
 PermitOpen              {{sshd_permit}}
 
 X11Forwarding		{{sshd_x11}}
+
+#Allow SCP 
+Subsystem sftp /usr/lib/openssh/sftp-server

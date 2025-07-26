@@ -1,6 +1,8 @@
 - name: Add user and set up sshd
   hosts: all
   gather_facts: true
+  vars_files:
+    - vars/main.yaml
   tasks:
     - name: Create User
       ansible.builtin.user:
@@ -34,6 +36,6 @@
         manage_dir: true
         state: present 
     - name: Setup sshd
-      ansible.builtin.import_role:
+      ansible.builtin.include_role:
         name: sshd-role
         tasks_from: main.yaml

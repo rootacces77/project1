@@ -2,6 +2,7 @@
 # vars file for firewalld-role
 
 #sshd_port: 2222
+#https_port: 443
 
 #Name of database zone
 database_zone: "database-zone"

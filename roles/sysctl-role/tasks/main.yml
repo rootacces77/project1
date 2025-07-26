@@ -5,3 +5,7 @@
 - name: Setup database sysctl
   ansible.builtin.include_tasks: database_server.yaml
   when: "'database' in group_names"
+
+- name: Setup bastion sysctl 
+  ansible.builtin.include_tasks: bastion_server.yaml
+  when: "'bastion' in group_names"

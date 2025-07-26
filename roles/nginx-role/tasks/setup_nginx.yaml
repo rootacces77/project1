@@ -6,10 +6,12 @@
 - name: Create config file
   ansible.builtin.template:
     src: bastion-rproxy.conf.j2
-    dest: /etc/nginx/conf/bastion-rproxy.conf
+    dest: /etc/nginx/nginx.conf
     mode: '0644'
     owner: root
     group: root
+  notify:
+    - Restart Nginx
 
 - name: Start and Enable Nginx
   ansible.builtin.service:

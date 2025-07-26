@@ -6,5 +6,9 @@
   ansible.builtin.import_tasks: copy_scripts.yaml
 
 - name: Task2
-  ansible.builtin.import_tasks: database_cron.yaml
+  ansible.builtin.include_tasks: database_cron.yaml
   when: "'database' in group_names"
+
+- name: Task3
+  ansible.builtin.include_tasks: bastion_cron.yaml
+  when: "'bastion' in group_names"
