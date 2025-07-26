@@ -20,3 +20,18 @@
 2025-07-26T15:59:38.638000+00:00 WARNING 'ansible_navigator.main' Path `/home/nikola/.ansible/ansible.cfg` does not exist. Falling back to non-strict resolution.
 2025-07-26T16:07:53.229322+00:00 WARNING 'ansible_navigator.main' Path `/home/nikola/.ansible/ansible.cfg` does not exist. Falling back to non-strict resolution.
 2025-07-26T16:09:18.537322+00:00 WARNING 'ansible_navigator.main' Path `/home/nikola/.ansible/ansible.cfg` does not exist. Falling back to non-strict resolution.
+2025-07-26T16:46:06.536960+00:00 WARNING 'ansible_navigator.main' Path `/home/nikola/.ansible/ansible.cfg` does not exist. Falling back to non-strict resolution.
+2025-07-26T16:48:21.436571+00:00 WARNING 'ansible_navigator.main' Path `/home/nikola/.ansible/ansible.cfg` does not exist. Falling back to non-strict resolution.
+2025-07-26T16:49:17.399971+00:00 WARNING 'ansible_navigator.main' Path `/home/nikola/.ansible/ansible.cfg` does not exist. Falling back to non-strict resolution.
+2025-07-26T16:50:38.440291+00:00 WARNING 'ansible_navigator.main' Path `/home/nikola/.ansible/ansible.cfg` does not exist. Falling back to non-strict resolution.
+2025-07-26T16:52:05.635981+00:00 WARNING 'ansible_navigator.main' Path `/home/nikola/.ansible/ansible.cfg` does not exist. Falling back to non-strict resolution.
+2025-07-26T16:54:19.569538+00:00 WARNING 'ansible_navigator.main' Path `/home/nikola/.ansible/ansible.cfg` does not exist. Falling back to non-strict resolution.
+2025-07-26T16:54:51.718998+00:00 WARNING 'ansible_navigator.main' Path `/home/nikola/.ansible/ansible.cfg` does not exist. Falling back to non-strict resolution.
+2025-07-26T16:54:53.477441+00:00 WARNING 'ansible_navigator.run' Dirty exit, killing the pid
+2025-07-26T16:54:59.884165+00:00 WARNING 'ansible_navigator.main' Path `/home/nikola/.ansible/ansible.cfg` does not exist. Falling back to non-strict resolution.
+2025-07-26T16:56:38.675667+00:00 WARNING 'ansible_navigator.main' Path `/home/nikola/.ansible/ansible.cfg` does not exist. Falling back to non-strict resolution.
+2025-07-26T16:59:14.999309+00:00 WARNING 'ansible_navigator.main' Path `/home/nikola/.ansible/ansible.cfg` does not exist. Falling back to non-strict resolution.
+2025-07-26T17:01:35.503630+00:00 WARNING 'ansible_navigator.main' Path `/home/nikola/.ansible/ansible.cfg` does not exist. Falling back to non-strict resolution.
+2025-07-26T17:03:41.225130+00:00 WARNING 'ansible_navigator.main' Path `/home/nikola/.ansible/ansible.cfg` does not exist. Falling back to non-strict resolution.
+2025-07-26T17:05:45.795559+00:00 WARNING 'ansible_navigator.main' Path `/home/nikola/.ansible/ansible.cfg` does not exist. Falling back to non-strict resolution.
+2025-07-26T17:08:02.092567+00:00 WARNING 'ansible_navigator.main' Path `/home/nikola/.ansible/ansible.cfg` does not exist. Falling back to non-strict resolution.

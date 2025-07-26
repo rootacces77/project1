@@ -2,8 +2,6 @@
   hosts: all
   gather_facts: true
   become: true
-#  vars:
-#    https_port: 443
   vars_files:
     - vars/main.yaml
   roles:
@@ -17,4 +15,5 @@
     - role: mariadb-role
     - role: cron-role
     - role: sysctl-role
+    - role: apparmor-role
     - role: AIDE-role

@@ -1,0 +1,21 @@
+- name: Install AppArmor
+  ansible.builtin.apt:
+    name: "{{ app_install }}"
+    state: present
+    update_cache: true
+
+- name: Copy profiles
+  ansible.builtin.copy:
+    src: "profiles/"
+    dest: /etc/apparmor.d/
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Enable profiles
+  ansible.builtin.command: 'apparmor_parser -r /etc/apparmor.d/{{item}}'
+  loop: "{{profiles}}"
+
+- name: Enforce profiles
+  ansible.builtin.command: 'aa-enforce {{item}}'
+  loop: "{{en_profiles}}"
