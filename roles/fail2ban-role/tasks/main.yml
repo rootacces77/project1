@@ -4,3 +4,4 @@
 
 - name: Task1
   ansible.builtin.include_tasks: bastion_fail2ban.yaml
+  when: "'bastion' in group_names"

@@ -1,7 +1,9 @@
 ---
 # vars file for selinux-role
-#sshd_port: 2222
 sshd_proto: "tcp"
 
 mariadb_path: "/database-data/mysql"
 mariadb_pid_file: "/var/run/mariadb/mariadb.pid"
+
+
+httpd_path: "/web-data"

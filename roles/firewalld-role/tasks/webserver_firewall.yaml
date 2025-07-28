@@ -1,0 +1,29 @@
+- name: Zone Exsists
+  ansible.builtin.stat:
+    path: /etc/firewalld/zones/webserver-zone.xml
+  register: zone_stat
+    
+- name: Create new zone
+  ansible.builtin.template:
+    src: webserver-zone.xml.j2
+    dest: /etc/firewalld/zones/webserver-zone.xml
+    mode: '0644'
+    owner: root
+    group: root
+  when: zone_stat.stat.exists == false
+#  notify:
+#    - Reload firewalld
+
+#- name: Flush Handlers
+#  ansible.builtin.meta: flush_handlers
+
+- name: Reload firewalld
+  ansible.builtin.command: 'firewall-cmd --reload'
+- name: Get default zone
+  ansible.builtin.command: 'firewall-cmd --get-default-zone'
+  register: default_zone
+
+- name: Set default zone
+  ansible.builtin.command: 'firewall-cmd --set-default-zone={{webserver_zone}}'
+  when: "webserver_zone not in default_zone.stdout"
+

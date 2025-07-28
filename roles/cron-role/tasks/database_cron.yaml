@@ -1,3 +1,12 @@
+- name: Copy scripts
+  ansible.builtin.copy:
+    src: "scripts/database/"
+    dest: "/scripts/"
+    owner: root
+    group: root
+    mode: '0744'
+
+
 - name: Run basic-update.sh
   ansible.builtin.cron:
     day: "*/15"

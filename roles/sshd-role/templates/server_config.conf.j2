@@ -31,5 +31,4 @@ PermitOpen              {{sshd_permit}}
 
 X11Forwarding		{{sshd_x11}}
 
-#Allow SCP 
-Subsystem sftp /usr/lib/openssh/sftp-server
+Subsystem sftp {{sshd_subsystem}}

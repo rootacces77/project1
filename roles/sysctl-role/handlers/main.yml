@@ -2,4 +2,4 @@
 ---
 # handlers file for sysctl-role
 - name: Reload sysctl
-  ansible.builtin.command: 'sysctl -p'
+  ansible.builtin.command: 'sysctl -p --system'

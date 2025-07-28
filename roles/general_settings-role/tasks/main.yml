@@ -13,3 +13,6 @@
 - name: Task4
   ansible.builtin.include_tasks: bastion_settings.yaml
   when: "'bastion' in group_names"
+
+- name: Task5
+  ansible.builtin.include_tasks: webserver_settings.yaml

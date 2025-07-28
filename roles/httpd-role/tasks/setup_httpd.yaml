@@ -1,0 +1,46 @@
+- name: Install httpd
+  ansible.builtin.dnf:
+    name: httpd
+    state: present
+
+- name: Create files dir
+  ansible.builtin.file:
+    state: directory
+    path: /web-data
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Copy website files
+  ansible.builtin.copy:
+    src: "web-data/"
+    dest: "/web-data/"
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Add firewall
+  ansible.builtin.include_role:
+    name: firewalld-role
+    tasks_from: httpd.yaml
+
+- name: Set SeLinux
+  ansible.builtin.include_role:
+    name: selinux-role
+    tasks_from: httpd.yaml
+
+- name: Generate Config
+  ansible.builtin.template:
+    src: myweb.conf.j2
+    dest: /etc/httpd/conf.d/myweb.conf
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Start and Enable httpd
+  ansible.builtin.service:
+    name: httpd
+    state: started
+    enabled: true
+
+

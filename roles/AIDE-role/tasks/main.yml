@@ -6,8 +6,13 @@
   ansible.builtin.import_tasks: install-aide.yaml
 
 - name: Task2
-  ansible.builtin.import_tasks: database-aide.yaml
+  ansible.builtin.include_tasks: database-aide.yaml
   when: "'database' in group_names"
 
 - name: Task3
-  ansible.builtin.import_tasks: bastion-aide.yaml
+  ansible.builtin.include_tasks: bastion-aide.yaml
+  when: "'bastion' in group_names"
+
+- name: Task4
+  ansible.builtin.include_tasks: webserver-aide.yaml
+  when: "'webserver' in group_names"

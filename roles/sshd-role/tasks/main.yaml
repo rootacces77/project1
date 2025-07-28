@@ -33,6 +33,7 @@
   vars:
     sshd_tcp_forwd: "yes"
     sshd_gw_ports: "no"
+    sshd_subsystem: "/usr/lib/openssh/sftp-server"
   ansible.builtin.template:
     src: server_config.conf.j2
     dest: /etc/ssh/sshd_config

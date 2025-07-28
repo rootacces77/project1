@@ -23,3 +23,5 @@ sshd_gw_ports: "no"
 sshd_permit: "any"
 
 sshd_x11: "no"
+
+sshd_subsystem: "internal-sftp"

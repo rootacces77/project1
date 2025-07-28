@@ -6,5 +6,4 @@
 
 #Name of database zone
 database_zone: "database-zone"
-bastion_zone: "bastion-zone"
-
+webserver_zone: "webserver-zone"

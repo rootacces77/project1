@@ -1,0 +1,8 @@
+- name: Set Fcontext
+  community.general.sefcontext:
+    setype: 'httpd_sys_content_t'
+    state: present
+    target: '{{httpd_path}}(/.*)?'
+  notify:
+    - Restorecon httpd
+    

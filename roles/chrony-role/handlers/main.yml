@@ -6,3 +6,4 @@
   ansible.builtin.service:
     name: chronyd
     state: restarted
+    daemon_update: true
