@@ -9,7 +9,7 @@ app_install:
   - apparmor-profiles-extra
 
 profiles:
-  - usr.bin.nginx
+  - usr.sbin.nginx
   - usr.bin.suricata
 
 

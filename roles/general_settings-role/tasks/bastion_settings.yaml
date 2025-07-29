@@ -1,4 +1,6 @@
 - name: Set Hostname
   ansible.builtin.hostname:
     name: "{{general_bastion_hostname}}" 
-    
+
+#- name: Update and upgrade
+#  ansible.builtin.shell: 'apt update && apt upgrade -y'   

@@ -1,7 +1,48 @@
-- name: Install httpd
+- name: Install system req
   ansible.builtin.dnf:
-    name: httpd
+    name: "{{httpd_req}}"
     state: present
+
+- name: Install pip req
+  ansible.builtin.pip:
+#    break_system_packages: true
+    name: "{{httpd_pip_req}}"
+    state: present
+    
+
+- name: Create cert DIR
+  ansible.builtin.file:
+    path: /certs
+    state: directory
+    owner: root 
+    group: root
+    mode: '0755'
+
+- name: Copy certificate
+  ansible.builtin.copy:
+    src: "webserver/"
+    dest: "/certs/"
+    owner: root
+    group: root
+    mode: '0644'
+
+#- name: Generate private key
+#  community.crypto.openssl_privatekey:
+#    path: /certs/httpd.key
+#    type: RSA
+#    size: 4096
+#    state: present
+#    mode: '0600'
+
+#- name: Generate cert
+#  community.crypto.x509_certificate:
+#    path: /certs/httpd.crt
+#    privatekey_path: /certs/httpd.key
+#    provider: selfsigned
+#    selfsigned_subject:
+#      common_name: "{{ansible_host}}"
+#   selfsigned_not_after: 365d
+#    mode: '0644'
 
 - name: Create files dir
   ansible.builtin.file:
@@ -29,10 +70,13 @@
     name: selinux-role
     tasks_from: httpd.yaml
 
+- name: Flush Handlers
+  ansible.builtin.meta: flush_handlers
+
 - name: Generate Config
   ansible.builtin.template:
-    src: myweb.conf.j2
-    dest: /etc/httpd/conf.d/myweb.conf
+    src: sakila.conf.j2
+    dest: /etc/httpd/conf.d/sakila.conf
     owner: root
     group: root
     mode: '0644'

@@ -11,6 +11,12 @@ datadir = {{mariadb_datadir}}
 socket = {{mariadb_socket}}
 #pid-file = {{mariadb_pid_file}}
 
+
+#SSL
+ssl-ca = /certs/database.crt
+ssl-cert = /certs/database.crt
+ssl-key = /certs/database.key
+
 # Performance tuning
 max_connections = 200
 table_open_cache = 400

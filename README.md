@@ -12,6 +12,12 @@
 
 
 #Things to do:
-#Database server:
-#- Certificate for communication
-#- NTP
+Fix NGINX
+Enable ssh on Ubuntu
+SSHD and useradd
+Test suricata and fail2ban
+
+Certificates
+SeLinux
+AppArmor
+Firewall rich rules

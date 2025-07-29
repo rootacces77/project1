@@ -17,5 +17,5 @@
   loop: "{{profiles}}"
 
 - name: Enforce profiles
-  ansible.builtin.command: 'aa-enforce {{item}}'
+  ansible.builtin.command: 'aa-complain {{item}}'
   loop: "{{en_profiles}}"

@@ -11,6 +11,40 @@
     group: mysql
     mode: '2750'
 
+- name: Create certs dir
+  ansible.builtin.file:
+    state: directory
+    path: /certs
+    owner: mysql
+    group: mysql
+    mode: '0755'
+
+- name: Copy certs
+  ansible.builtin.copy:
+    src: "database/"
+    dest: "/certs/"
+    owner: mysql
+    group: mysql
+    mode: '0644'
+
+#- name: Generate private key
+#  community.crypto.openssl_privatekey:
+#    path: /certs/mariadb.key
+#    type: RSA
+#    size: 4096
+#    state: present
+#    mode: '0600'
+
+#- name: Generate cert
+#  community.crypto.x509_certificate:
+#    path: /certs/mariadb.crt
+#    privatekey_path: /certs/mariadb.key
+#    provider: selfsigned
+#    selfsigned_subject:
+#      common_name: "{{ansible_host}}"
+#    selfsigned_not_after: 365d
+#    mode: '0644'
+
 - name: Call Firewalld
   ansible.builtin.import_role:
     name: firewalld-role
@@ -20,6 +54,9 @@
   ansible.builtin.import_role:
     name: selinux-role
     tasks_from: mariadb.yaml
+
+- name: Flush Handlers
+  ansible.builtin.meta: flush_handlers
 
 - name: Create Config File
   ansible.builtin.template:
@@ -47,6 +84,18 @@
     update_password: always
     login_unix_socket: "{{mariadb_socket}}"
   ignore_errors: true
+
+- name: Create User
+  community.mysql.mysql_user:
+    name: "{{db_user}}"
+    password: "{{db_password}}"
+    state: present
+    priv: 'sakila.*:ALL'
+    host: '172.16.0.3'
+    update_password: always
+    login_unix_socket: "{{mariadb_socket}}"
+    login_user: root
+    login_password: "{{db_password}}"
 
 - name: Import deploy_database.yaml
   ansible.builtin.import_tasks: deploy_database.yaml

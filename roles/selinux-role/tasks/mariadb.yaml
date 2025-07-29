@@ -6,3 +6,10 @@
   notify:
     - Restorecon mariadb
     
+- name: Set fcontext
+  community.general.sefcontext:
+    setype: mysqld_etc_t 
+    state: present
+    target: '/certs(/.*)?'
+  notify:
+    - Restorecon certs

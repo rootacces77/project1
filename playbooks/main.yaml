@@ -8,7 +8,8 @@
     - role: general_settings-role
     - role: firewalld-role
     - role: chrony-role
-    - role: storage-role 
+    - role: storage-role
+    - role: httpd-role 
     - role: nginx-role
     - role: suricata-role
     - role: fail2ban-role

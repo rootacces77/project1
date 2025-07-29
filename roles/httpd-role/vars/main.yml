@@ -1,3 +1,19 @@
 #SPDX-License-Identifier: MIT-0
 ---
 # vars file for httpd-role
+
+httpd_data_wsgi: "/web-data/sakila-demo/sakila.wsgi"
+
+httpd_req:
+  - httpd
+  - python3-pip
+  - mod_wsgi
+  - mod_ssl
+  - python3-mod_wsgi
+
+httpd_pip_req:
+  - flask
+  - pymysql
+  - flask-bootstrap
+  - flask-wtf
+
