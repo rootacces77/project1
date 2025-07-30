@@ -8,9 +8,9 @@ Listen {{httpd_port}}
     WSGIScriptAlias / {{httpd_data_wsgi}}
     
     
-    SSLEngine on
-    SSLCertificateFile /certs/webserver.crt
-    SSLCertificateKeyFile /certs/webserver.key
+#    SSLEngine on
+#    SSLCertificateFile /certs/webserver.crt
+#    SSLCertificateKeyFile /certs/webserver.key
 
     <Directory {{httpd_data_path}}>
         Require all granted

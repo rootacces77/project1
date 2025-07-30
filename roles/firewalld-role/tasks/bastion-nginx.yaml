@@ -1,7 +1,0 @@
-- name: Add HTTPS 
-  ansible.posix.firewalld:
-    service: https
-    state: enabled
-    zone: 'bastion-zone'
-    immediate: true
-    permanent: true

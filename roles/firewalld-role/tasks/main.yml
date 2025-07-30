@@ -1,5 +1,5 @@
 ---
-# tasks file for firewalld-role
+# tasks file for firewalld2-role
 - name: Setup database firewall
   ansible.builtin.include_tasks: database_firewall.yaml
   when: "'database' in group_names"

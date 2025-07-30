@@ -1,13 +1,14 @@
----
-# handlers file for sshd-role
 - name: Restart sshd
   ansible.builtin.service:
     name: sshd
     state: restarted
+    enabled: true
+  when: ansible_facts.distribution == 'RedHat'
 
 - name: Restart ssh
   ansible.builtin.service:
     name: ssh
     state: restarted
-    daemon_reload: true
     enabled: true
+    daemon_reload: true
+  when: ansible_facts.distribution == 'Ubuntu'

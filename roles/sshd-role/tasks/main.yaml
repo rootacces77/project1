@@ -1,46 +1,5 @@
 ---
 # tasks file for sshd-role
-- name: Setup Firewalld
-  ansible.builtin.import_role:
-    name: firewalld-role
-    tasks_from: sshd.yaml
-  when: ansible_facts['distribution'] == "RedHat"
 
-- name: Setup SeLinux
-  ansible.builtin.import_role:
-    name: selinux-role
-    tasks_from: sshd.yaml
-  when: ansible_facts['distribution'] == "RedHat"
-
-- name: Generate nftables.conf
-  ansible.builtin.include_role:
-    name: firewalld-role
-    tasks_from: bastion_firewall.yaml
-  when: ansible_facts['distribution'] == "Ubuntu"
-
-- name: Setup sshd config
-  ansible.builtin.template:
-    src: server_config.conf.j2
-    dest: /etc/ssh/sshd_config.d/server_config.conf
-    mode: '0640'
-    owner: root
-    group: root
-  when: "'bastion' not in group_names"
-  notify:
-    - Restart sshd
-  
-- name: Setup sshd config
-  vars:
-    sshd_tcp_forwd: "yes"
-    sshd_gw_ports: "no"
-    sshd_subsystem: "/usr/lib/openssh/sftp-server"
-  ansible.builtin.template:
-    src: server_config.conf.j2
-    dest: /etc/ssh/sshd_config
-    mode: '0640'
-    owner: root
-    group: root
-  when: "'bastion' in group_names"
-  notify:
-    - Restart ssh
-
+- name: Task1
+  ansible.builtin.include_tasks: setup_sshd.yaml

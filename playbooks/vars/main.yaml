@@ -1,7 +1,24 @@
-sshd_port: 2222
-mariadb_port: 3306
+#Overall vars: 
+user_name: "ansible"
+user_password: "{{root | password_hash('sha512' ) }}"
+user_public_key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBhuCNqtfB/3G6kC6CYLuP1+7xQSQXnJ8oFeeLoLR0sO proj>
+db_user: "ansible"
+db_password: "root"
 
+sshd_port: 2222
+
+#Database server
+mariadb_port: 3306
+db_device_path: "/dev/sdb"
+#Needed for application website
+database_ip: '172.16.0.6'
+
+#HTTPD - webserver
 httpd_port: 8080
+#Path for SeLinux and httpd
 httpd_data_path: "/web-data/sakila-demo"
+
+#NGINX - bastion host
 https_port: 443
 http_port: 80
+

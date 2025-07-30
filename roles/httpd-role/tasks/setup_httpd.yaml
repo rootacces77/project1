@@ -60,10 +60,13 @@
     group: root
     mode: '0644'
 
-- name: Add firewall
-  ansible.builtin.include_role:
-    name: firewalld-role
-    tasks_from: httpd.yaml
+- name: Generate application.py
+  ansible.builtin.template:
+    src: sakila_demo.py.j2
+    dest: /web-data/sakila-demo/sakila_demo.py
+    owner: root
+    group: root
+    mode: '0644'
 
 - name: Set SeLinux
   ansible.builtin.include_role:

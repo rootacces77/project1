@@ -4,18 +4,28 @@
     state: present
     update_cache: true
 
-- name: Copy profiles
-  ansible.builtin.copy:
-    src: "profiles/"
-    dest: /etc/apparmor.d/
-    owner: root
-    group: root
-    mode: '0644'
+#- name: Copy profiles
+#  ansible.builtin.copy:
+#    src: "profiles/"
+#    dest: /etc/apparmor.d/
+#    owner: root
+#    group: root
+#    mode: '0644'
 
-- name: Enable profiles
-  ansible.builtin.command: 'apparmor_parser -r /etc/apparmor.d/{{item}}'
+#- name: Enable profiles
+#  ansible.builtin.command: 'apparmor_parser -r /etc/apparmor.d/{{item}}'
+#  loop: "{{profiles}}"
+- name: Check profile
+  ansible.builtin.stat:
+    path: /etc/apparmor.d/usr.sbin.nginx
+  register: app_check
+
+- name: Generate AppArmor profile using aa-autodep
+  ansible.builtin.command: 'aa-autodep {{ item }}'
+  when: not app_check.stat.exists
+  loop: "{{ en_profiles }}"
+
+- name: Complain profiles
+  ansible.builtin.command: 'aa-complain /etc/apparmor.d/{{item}}'
+  when: not app_check.stat.exists
   loop: "{{profiles}}"
-
-- name: Enforce profiles
-  ansible.builtin.command: 'aa-complain {{item}}'
-  loop: "{{en_profiles}}"

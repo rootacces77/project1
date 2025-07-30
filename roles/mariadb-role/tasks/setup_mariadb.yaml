@@ -45,11 +45,6 @@
 #    selfsigned_not_after: 365d
 #    mode: '0644'
 
-- name: Call Firewalld
-  ansible.builtin.import_role:
-    name: firewalld-role
-    tasks_from: mariadb.yaml
-
 - name: Call SeLinux
   ansible.builtin.import_role:
     name: selinux-role

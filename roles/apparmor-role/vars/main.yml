@@ -14,5 +14,5 @@ profiles:
 
 
 en_profiles:
-  - nginx
-  - suricata
+  - /usr/sbin/nginx
+  - /usr/bin/suricata

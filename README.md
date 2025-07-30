@@ -12,12 +12,13 @@
 
 
 #Things to do:
-Fix NGINX
-Enable ssh on Ubuntu
-SSHD and useradd
-Test suricata and fail2ban
+Set up suricata
 
-Certificates
+network interfaces
+storage devices
+
+httpd mods
+Certificates 
 SeLinux
-AppArmor
+AppArmor - setup script
 Firewall rich rules
