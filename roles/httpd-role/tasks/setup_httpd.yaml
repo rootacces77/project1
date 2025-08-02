@@ -8,7 +8,12 @@
 #    break_system_packages: true
     name: "{{httpd_pip_req}}"
     state: present
-    
+
+- name: Delete default configs
+  ansible.builtin.import_tasks: default_configs.yaml    
+
+- name: Setup mod_security
+  ansible.builtin.import_tasks: mod_security.yaml
 
 - name: Create cert DIR
   ansible.builtin.file:
@@ -18,31 +23,27 @@
     group: root
     mode: '0755'
 
-- name: Copy certificate
-  ansible.builtin.copy:
-    src: "webserver/"
-    dest: "/certs/"
-    owner: root
-    group: root
+- name: Generate private key
+  community.crypto.openssl_privatekey:
+    path: /certs/webserver.key
+    type: RSA
+    size: 4096
+    state: present
+    mode: '0600'
+
+- name: Generate CSR with CN
+  community.crypto.openssl_csr:
+    path: /certs/webserver.csr
+    privatekey_path: /certs/webserver.key
+    common_name: "{{webserver_ip}}"
+
+- name: Generate cert
+  community.crypto.x509_certificate:
+    path: /certs/webserver.crt
+    privatekey_path: /certs/webserver.key
+    provider: selfsigned
+    selfsigned_not_after: "+365d"
     mode: '0644'
-
-#- name: Generate private key
-#  community.crypto.openssl_privatekey:
-#    path: /certs/httpd.key
-#    type: RSA
-#    size: 4096
-#    state: present
-#    mode: '0600'
-
-#- name: Generate cert
-#  community.crypto.x509_certificate:
-#    path: /certs/httpd.crt
-#    privatekey_path: /certs/httpd.key
-#    provider: selfsigned
-#    selfsigned_subject:
-#      common_name: "{{ansible_host}}"
-#   selfsigned_not_after: 365d
-#    mode: '0644'
 
 - name: Create files dir
   ansible.builtin.file:

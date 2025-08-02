@@ -1,16 +1,16 @@
 Listen {{httpd_port}}
 
 <VirtualHost *:{{httpd_port}}>
-    ServerName 172.16.0.3
+    ServerName {{webserver_ip}}
 
     WSGIDaemonProcess sakila python-path={{httpd_data_path}}:/usr/lib/python3.9/site-packages
     WSGIProcessGroup sakila
     WSGIScriptAlias / {{httpd_data_wsgi}}
     
     
-#    SSLEngine on
-#    SSLCertificateFile /certs/webserver.crt
-#    SSLCertificateKeyFile /certs/webserver.key
+    SSLEngine on
+    SSLCertificateFile /certs/webserver.crt
+    SSLCertificateKeyFile /certs/webserver.key
 
     <Directory {{httpd_data_path}}>
         Require all granted

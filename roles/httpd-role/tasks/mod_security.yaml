@@ -1,0 +1,29 @@
+#- name: Create CSR dir
+#  ansible.builtin.file:
+#    state: directory
+#    path: /etc/csr
+#    owner: root
+#    group: root
+#    mode: '0755'
+
+- name: Copy files
+  ansible.builtin.copy:
+    src: "crs"
+    dest: "/etc/"
+    owner: root
+    group: root
+
+- name: Edit mod_security.conf
+  ansible.builtin.blockinfile:
+    marker: "# {mark} ANSIBLE CSR BLOCK"
+    block: |
+      IncludeOptional /etc/crs/crs-setup.conf                               
+      IncludeOptional /etc/crs/plugins/*-config.conf                               
+      IncludeOptional /etc/crs/plugins/*-before.conf                               
+      IncludeOptional /etc/crs/rules/*.conf                               
+      IncludeOptional /etc/crs/plugins/*-after.conf 
+    insertbefore: "^<IfModule.*"
+    state: present
+    path: /etc/httpd/conf.d/mod_security.conf
+
+   

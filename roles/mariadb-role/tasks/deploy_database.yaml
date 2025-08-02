@@ -14,10 +14,29 @@
     login_user: root
     login_password: "{{db_password}}"
     login_unix_socket: "{{mariadb_socket}}"
+
+- name: Check if schema is already imported
+  community.mysql.mysql_info:
+    login_user: root
+    login_password: "{{ db_password }}"
+    login_unix_socket: "{{ mariadb_socket }}"
+    filter: tables
+    login_db: "{{ database_name }}"
+  register: db_tables
+
+
+- name: Debug table list
+  debug:
+    var: db_tables
     
 - name: Import Schema
   ansible.builtin.shell: 'sudo mysql --user=root --password={{db_password}} {{database_name}} < /database-data/sakila-db/sakila-schema.sql'
-
+  when: "'sakila' not in db_tables.databases"
+  
+- name: Set facts
+  ansible.builtin.set_fact:
+    db_table: true
 
 - name: Import Data
   ansible.builtin.shell: 'sudo mysql --user=root --password={{db_password}} {{database_name}} < /database-data/sakila-db/sakila-data.sql'
+  when: db_table == true and db_tables.databases.sakila.tables == 0

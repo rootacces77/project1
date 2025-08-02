@@ -7,8 +7,10 @@ httpd_data_wsgi: "/web-data/sakila-demo/sakila.wsgi"
 httpd_req:
   - httpd
   - python3-pip
+  - python3-cryptography
   - mod_wsgi
   - mod_ssl
+  - mod_security
   - python3-mod_wsgi
 
 httpd_pip_req:

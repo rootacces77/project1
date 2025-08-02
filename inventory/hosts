@@ -1,8 +1,8 @@
 [database]
-#d1 ansible_host=172.16.0.6
+d1 ansible_host=172.16.0.7
 
 [webserver]
-w1 ansible_host=172.16.0.3 ansible_ssh_common_args="-o ProxyJump=root@172.16.0.2"
+#w1 ansible_host=172.16.0.3 ansible_ssh_common_args="-o ProxyJump=root@172.16.0.2"
 
 [bastion]
 b1 ansible_host=172.16.0.2

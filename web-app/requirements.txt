@@ -1,2 +1,0 @@
-httpd mod_wsgi python3-mod_wsgi
-pip3 install flask pymysql flask-bootstrap flask-wtf

@@ -5,13 +5,20 @@ user_public_key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBhuCNqtfB/3G6kC6CYLuP1+7xQ
 db_user: "ansible"
 db_password: "root"
 
+#bastion_iface1: ""
+#bastion_iface2: ""
+#webserver_iface1: ""
+#database_iface2: ""
+
+database_ip: '172.16.0.7'
+webserver_ip: '172.16.0.3'
+bastion_ip: '172.16.0.2'
+
 sshd_port: 2222
 
 #Database server
 mariadb_port: 3306
 db_device_path: "/dev/sdb"
-#Needed for application website
-database_ip: '172.16.0.6'
 
 #HTTPD - webserver
 httpd_port: 8080

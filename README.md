@@ -13,12 +13,8 @@
 
 #Things to do:
 Set up suricata
-
-network interfaces
-storage devices
-
-httpd mods
-Certificates 
-SeLinux
-AppArmor - setup script
 Firewall rich rules
+
+
+mod_security (download rules)
+mariadb (import schema)

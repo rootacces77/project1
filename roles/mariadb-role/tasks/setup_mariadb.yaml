@@ -19,31 +19,28 @@
     group: mysql
     mode: '0755'
 
-- name: Copy certs
-  ansible.builtin.copy:
-    src: "database/"
-    dest: "/certs/"
+- name: Generate private key
+  community.crypto.openssl_privatekey:
+    path: /certs/database.key
+    type: RSA
+    size: 4096
+    state: present
+    mode: '0600'
     owner: mysql
-    group: mysql
+
+- name: Generate CSR with CN
+  community.crypto.openssl_csr:
+    path: /certs/database.csr
+    privatekey_path: /certs/database.key
+    common_name: "{{database_ip}}"
+
+- name: Generate cert
+  community.crypto.x509_certificate:
+    path: /certs/database.crt
+    privatekey_path: /certs/database.key
+    provider: selfsigned
+    selfsigned_not_after: "+365d"
     mode: '0644'
-
-#- name: Generate private key
-#  community.crypto.openssl_privatekey:
-#    path: /certs/mariadb.key
-#    type: RSA
-#    size: 4096
-#    state: present
-#    mode: '0600'
-
-#- name: Generate cert
-#  community.crypto.x509_certificate:
-#    path: /certs/mariadb.crt
-#    privatekey_path: /certs/mariadb.key
-#    provider: selfsigned
-#    selfsigned_subject:
-#      common_name: "{{ansible_host}}"
-#    selfsigned_not_after: 365d
-#    mode: '0644'
 
 - name: Call SeLinux
   ansible.builtin.import_role:

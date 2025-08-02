@@ -1,6 +1,8 @@
 - name: Install nginx
   ansible.builtin.package:
-    name: nginx
+    name:
+      - nginx
+      - python3-cryptography
     state: present
 
 - name: Create cert DIR
@@ -11,31 +13,28 @@
     group: root
     mode: '0755'
 
-- name: Copy certs
-  ansible.builtin.copy:
-    src: "bastion/"
-    dest: "/certs/"
-    owner: root
-    group: root
+- name: Generate private key
+  community.crypto.openssl_privatekey:
+    path: /certs/bastion.key
+    type: RSA
+    size: 4096
+    state: present
+    mode: '0600'
+
+- name: Generate CSR with CN
+  community.crypto.openssl_csr:
+    path: /certs/bastion.csr
+    privatekey_path: /certs/bastion.key
+    common_name: "{{bastion_ip}}"
+
+- name: Generate cert
+  community.crypto.x509_certificate:
+    path: /certs/bastion.crt
+    privatekey_path: /certs/bastion.key
+    csr_path: /certs/bastion.csr
+    provider: selfsigned
+    selfsigned_not_after: "+365d"
     mode: '0644'
-
-#- name: Generate private key
-#  community.crypto.openssl_privatekey:
-#    path: /certs/nginx.key
-#    type: RSA
-#    size: 4096
-#    state: present
-#    mode: '0600'
-
-#- name: Generate cert
-#  community.crypto.x509_certificate:
-#    path: /certs/nginx.crt
-#    privatekey_path: /certs/nginx.key
-#    provider: selfsigned
-#    selfsigned_subject:
-#      common_name: "{{ansible_host}}"
-#    selfsigned_not_after: 365d
-#    mode: '0644'
 
 - name: Create config file
   ansible.builtin.template:
@@ -46,6 +45,12 @@
     group: root
   notify:
     - Restart Nginx
+
+- name: Remove default site
+  ansible.builtin.file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+    
 
 - name: Start and Enable Nginx
   ansible.builtin.service:
