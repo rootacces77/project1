@@ -12,9 +12,7 @@
 
 
 #Things to do:
-Set up suricata
 Firewall rich rules
-
-
-mod_security (download rules)
-mariadb (import schema)
+Sysctl
+Routes
+README

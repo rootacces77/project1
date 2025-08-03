@@ -5,7 +5,6 @@
 
 - name: Install pip req
   ansible.builtin.pip:
-#    break_system_packages: true
     name: "{{httpd_pip_req}}"
     state: present
 

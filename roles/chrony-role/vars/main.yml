@@ -4,5 +4,5 @@
 ntp_pool1: rs.pool.ntp.org
 ntp_pool2: pool.ntp.org
 
-bastion_ntp: 172.16.0.2
+bastion_ntp: "{{bastion_ip}}"
 server_allow: '172.16.0.0/24'

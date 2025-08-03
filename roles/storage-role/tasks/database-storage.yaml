@@ -27,8 +27,8 @@
     opts: "--type vdo --virtualsize {{db_lv_vsize}}" 
     size: "{{db_lv_size}}"
     state: present
-#  ignore_errors: true
   when: lvol_stat.stat.exists == false
+
 - name: Create Filesystem
   ansible.builtin.filesystem:
     dev: '/dev/{{db_vg_name}}/{{db_lv_name}}'

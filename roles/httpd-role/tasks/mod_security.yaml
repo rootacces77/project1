@@ -1,17 +1,27 @@
-#- name: Create CSR dir
-#  ansible.builtin.file:
-#    state: directory
-#    path: /etc/csr
-#    owner: root
-#    group: root
-#    mode: '0755'
-
 - name: Copy files
   ansible.builtin.copy:
-    src: "crs"
+    src: "crs.tar.gz"
     dest: "/etc/"
     owner: root
     group: root
+
+- name: Unarchive crs
+  ansible.builtin.unarchive:
+    remote_src: true
+    src: /etc/crs.tar.gz
+    dest: /etc/
+
+- name: Remove archive
+  ansible.builtin.file:
+    path: /etc/crs.tar.gz
+    state: absent
+
+- name: Rule to allow webapp to work
+  ansible.builtin.lineinfile:
+    line: "    SecRuleRemoveById 920350"
+    insertafter: "^<IfModule mod_security2.c>"
+    state: present
+    path: "/etc/httpd/conf.d/mod_security.conf"
 
 - name: Edit mod_security.conf
   ansible.builtin.blockinfile:

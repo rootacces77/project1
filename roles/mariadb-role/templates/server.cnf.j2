@@ -6,10 +6,9 @@ socket = {{mariadb_socket}}
 [mysqld]
 user = mysql
 port = 3306
-bind-address = 0.0.0.0
+bind-address = {{database_ip}}
 datadir = {{mariadb_datadir}}
 socket = {{mariadb_socket}}
-#pid-file = {{mariadb_pid_file}}
 
 
 #SSL

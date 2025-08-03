@@ -4,7 +4,6 @@
 mariadb_install: ['mariadb-server','python-PyMySQL','python3-cryptography']
 mariadb_socket: /database-data/mysql/mysql.sock
 mariadb_datadir: /database-data/mysql
-#mariadb_pid_file: /var/run/mariadb/mariadb.pid
 
 database_name: sakila
 mariadb_src_files: sakila-db

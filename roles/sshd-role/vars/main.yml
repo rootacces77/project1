@@ -1,6 +1,5 @@
 ---
 # vars file for sshd-role
-#sshd_port: 2222
 sshd_pam: "yes"
 sshd_root_login: "no"
 sshd_empty: "no"
