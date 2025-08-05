@@ -83,7 +83,7 @@
     password: "{{db_password}}"
     state: present
     priv: 'sakila.*:ALL'
-    host: 'webserver_ip'
+    host: "{{webserver_ip}}"
     update_password: always
     login_unix_socket: "{{mariadb_socket}}"
     login_user: root

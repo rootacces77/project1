@@ -6,12 +6,9 @@ ansible-navigator:
   execution-environment:
     container-engine: docker
     enabled: true
-    image: project-env:1.0
+    image: project1-env:1.0
     pull:
       policy: missing
-
-#  logging:
-
 
   playbook-artifact:
     enable: false

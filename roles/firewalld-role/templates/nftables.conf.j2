@@ -19,7 +19,7 @@ table inet filter {
         tcp dport {{https_port}} accept
         
         #Allow HTTP
-        tcp dport {{http_port}} accept
+        #tcp dport {{http_port}} accept
 
         # Drop everything else
         counter drop
@@ -28,7 +28,6 @@ table inet filter {
     chain forward {
         type filter hook forward priority 0;
 
-        type filter hook forward priority 0;
 
         # Allow forwarding of established/related connections
         ct state established,related accept
@@ -37,8 +36,8 @@ table inet filter {
        # ip saddr 0.0.0.0/0 ip daddr 172.16.0.0/24 tcp dport 80 accept
 
         # Allow traffic forwarded from public to private interface (example)
-        iifname "enp0s3" oifname "enp0s8" ip protocol tcp tcp dport {{http_port}} accept
-        iifname "enp0s8" oifname "enp0s3" ip protocol tcp tcp dport {{https_port}} accept
+        iifname "{{bastion_pub_iface}}" oifname "{{bastion_priv_iface}}" ip protocol tcp tcp dport {{https_port}} accept
+        iifname "{{bastion_priv_iface}}" oifname "{{bastion_pub_iface}}" ip protocol tcp tcp dport {{https_port}} accept
         # Drop everything else
         counter drop
     }

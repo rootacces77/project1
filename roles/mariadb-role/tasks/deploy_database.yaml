@@ -37,10 +37,6 @@
     query: "SELECT COUNT(*) as count FROM actor;"
   register: actor_data
 
-- name: Debug
-  ansible.builtin.debug:
-    var: actor_data
-
 - name: Import Data
   ansible.builtin.shell: 'sudo mysql --user=root --password={{db_password}} {{database_name}} < /database-data/sakila-db/sakila-data.sql'
   when: actor_data.query_result[0][0].count == 0

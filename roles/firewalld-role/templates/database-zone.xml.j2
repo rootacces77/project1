@@ -2,6 +2,14 @@
 <zone target="DROP">
   <short>{{database_zone}}</short>
   <description>Zone for database server</description>
-  <service name="sshd"/>
-  <service name="mariadb"/>
+  <rule family="ipv4">
+    <source address="{{bastion_ip}}"/>
+    <service name="sshd"/>
+    <accept/>
+  </rule>
+  <rule family="ipv4">
+    <source address="{{webserver_ip}}"/>
+    <service name="mariadb"/>
+    <accept/>
+  </rule>
 </zone>
